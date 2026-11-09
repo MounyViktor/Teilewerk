@@ -1,0 +1,89 @@
+/* Design 2: Himmelblau, Weiß und Pink. Weicher Farbverlauf mit feinen Rippen, Glas-Karten, leichte Schrift. */
+:root {
+  --red: #0593C6;
+  --red-dark: #B3206F;
+  --white: #FCFFFF;
+  --lime: #FCFFFF;
+  --ink: #06283D;
+  --pink: #C92A86;
+  --deep: #046E96;
+  --muted: #4A6070;
+  --line: #D3E2EA;
+  --soft: #EAF3F7;
+  --glass: rgba(252, 255, 255, .88);
+  --glass-dark: rgba(2, 62, 100, .5);
+}
+
+html { background: var(--red); }
+body { background: transparent; }
+
+/* Unscharfer Farbverlauf ohne Filter, damit das iPhone flüssig bleibt. Darüber die feinen senkrechten Rippen. */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .055) 0 1px, transparent 1px 9px),
+    radial-gradient(38% 30% at 78% 34%, rgba(3, 56, 104, .85), transparent 100%),
+    radial-gradient(46% 26% at 40% 70%, rgba(216, 57, 149, .92), transparent 100%),
+    radial-gradient(34% 22% at 62% 52%, rgba(240, 130, 130, .7), transparent 100%),
+    radial-gradient(70% 30% at 10% 100%, rgba(3, 90, 150, .8), transparent 100%),
+    var(--red);
+}
+
+/* Schrift: leicht und eng statt fett und breit */
+h1, h2, .stat { font-stretch: 100%; text-transform: none; }
+h1 {
+  font-weight: 400; font-size: clamp(40px, 11.8vw, 66px); line-height: 1; letter-spacing: -.045em;
+  margin: 18px 0 18px; overflow-wrap: break-word; hyphens: auto;
+}
+h1::before { content: none; }
+.back + h1, .back + .spread h1 { font-size: clamp(30px, 8.4vw, 46px); line-height: 1.04; }
+h2 { font-weight: 400; font-size: 25px; letter-spacing: -.035em; margin: 26px 0 10px; }
+.stat { font-weight: 400; font-size: 33px; letter-spacing: -.045em; }
+
+/* Text direkt auf dem Verlauf bekommt einen weichen Schatten, damit er überall lesbar bleibt. */
+h1, h2, .back a, .onred, main > .hint, main > .muted, main > form:not(.card) > .field > label { text-shadow: 0 1px 10px rgba(2, 40, 70, .5); }
+main > .muted { color: var(--white); font-weight: 500; }
+
+.sticker { width: 76px; height: 76px; transform: none; filter: drop-shadow(0 3px 8px rgba(2, 40, 70, .35)); }
+
+/* Glas-Karten */
+.card, fieldset {
+  background: var(--glass); border: 1px solid rgba(255, 255, 255, .55); border-radius: 22px;
+  -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3);
+}
+fieldset fieldset { background: var(--soft); -webkit-backdrop-filter: none; backdrop-filter: none; }
+legend { font-stretch: 100%; font-weight: 600; font-size: 13px; text-transform: none; letter-spacing: 0; background: var(--deep); color: var(--white); }
+
+/* Kennzahlen als dunkles Glas mit weißer Schrift */
+.stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.stats .card { background: var(--glass-dark); color: var(--white); border-color: rgba(255, 255, 255, .28); overflow-wrap: anywhere; hyphens: auto; }
+.stats .muted { color: var(--white); font-size: 13px; line-height: 1.3; }
+
+/* Formulare */
+input[type=text], input[type=email], input[type=search], input[type=date], input[type=datetime-local], select, textarea { border-width: 1px; }
+input:focus, select:focus, textarea:focus { outline-color: var(--pink); border-color: var(--pink); }
+.filters select, .filters input { background-color: var(--glass); }
+.check input { accent-color: var(--pink); }
+
+/* Knöpfe: Weiß auf dem Verlauf, Pink auf den Karten */
+.btn, button { font-weight: 600; letter-spacing: -.01em; }
+.card .btn:not(.secondary), .card button:not(.secondary):not(.danger), fieldset button:not(.secondary):not(.danger) { background: var(--pink); border-color: var(--pink); color: var(--white); }
+.btn.secondary, button.secondary { border-width: 1px; }
+button.danger { border-width: 1px; }
+
+a { color: var(--deep); }
+.badge.lager { background: var(--deep); color: var(--white); }
+.badge.reserviert { background: var(--pink); }
+.notice { background: var(--glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.notice.warn { background: var(--glass); border-left: 5px solid var(--pink); }
+.notice.ok { border-left: 5px solid var(--deep); }
+.notice.err { background: var(--ink); }
+.card .notice.warn, fieldset .notice.warn { background: #FBE9F3; }
+
+/* Navigation als schwebende Glas-Leiste */
+.tabs {
+  background: var(--glass-dark); border: 1px solid rgba(255, 255, 255, .3); box-shadow: 0 8px 26px rgba(2, 40, 70, .35);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4); backdrop-filter: blur(20px) saturate(1.4);
+}
+.tabs a { font-weight: 500; letter-spacing: -.02em; }
+.tabs a.active { background: var(--white); color: var(--ink); font-weight: 700; }
