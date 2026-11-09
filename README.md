@@ -2,7 +2,8 @@
 
 Lager- und Rechnungsverwaltung für gebrauchte Roller-Teile als Offline-Web-App.
 Nach der Installation läuft sie ohne PC, Server und Internet. Alle Daten bleiben auf dem iPhone.
-Das bisherige Teilewerk in `C:\Projects\Teilewerk` ist davon unabhängig. Die beiden tauschen keine Daten aus.
+Die App liegt unter <https://teilewerk-app.pages.dev>. Locale PC Version vor paar Monaten von mir erstellt. 
+Designänderung und "übersetzen" das es auf Iphone läuft ohne das man ein Developer Account braucht von Claude :D
 
 ## Einrichten
 
@@ -121,17 +122,6 @@ Kläre mit deinem Steuerberater, ob diese Art der Aufbewahrung für dich ausreic
 Die App ist ein Hilfsmittel und ersetzt keine Rechts- oder Steuerberatung.
 
 Nicht getestet ist das Verhalten auf einem echten iPhone (Kamera, Teilen-Menü, Home-Bildschirm-Modus). Geprüft wurde mit Edge und der WebKit-Engine auf Windows.
-
-## Aktualisieren
-
-Die App liegt unter <https://teilewerk-app.pages.dev>. Nach einer Änderung im Projektordner bauen und an **dieselbe Adresse** hochladen:
-
-```powershell
-npm run build
-npx wrangler pages deploy dist --project-name teilewerk-app --branch main
-```
-
-Die App lädt die neue Version im Hintergrund beim nächsten Start mit Internet. Deine Daten bleiben erhalten. Sichere sie trotzdem vorher.
 
 ## Entwicklung
 
